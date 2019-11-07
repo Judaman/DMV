@@ -68,10 +68,11 @@ module.exports = {
             var allEmployees = json;
             for (var i = 0; i < allEmployees.length; i++) {
               var firstInitial = String(allEmployees[i].FirstName)[0];
-              if (allEmployees[i].MiddleName) {
-                var middleInitial = String(allEmployees[i].MiddleName)[0];
+              console.log(allEmployees);
+              if (allEmployees[i].MiddleInitial != " ") {
+                var middleInitial = String(allEmployees[i].MiddleInitial)[0];
               } else {
-                var middleInitial = ""
+                var middleInitial = "";
               }
               var lastInitial = String(allEmployees[i].LastName)[0];
               employeeNumbersObj[firstInitial + middleInitial + lastInitial] = allEmployees[i].EmployeeNumber;
