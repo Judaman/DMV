@@ -1,3 +1,5 @@
+sendToWebPt()
+
 async function sendToWebPt(lName, fName) {
 
   'use strict';
@@ -5,7 +7,7 @@ async function sendToWebPt(lName, fName) {
   const puppeteer = require('puppeteer');
 
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     timeout: 90000,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
@@ -67,7 +69,7 @@ async function sendToWebPt(lName, fName) {
   //add contact info
   await page.click('label#ext-comp-1050');
 
-// first open dropdown then select (this seems to be the best option)
+  // first open dropdown then select (this seems to be the best option)
   await page.click('img#ext-gen536');
   await page.type('div#ext-gen535 > input#ext-comp-1159', 'Work');
 
@@ -89,12 +91,30 @@ async function sendToWebPt(lName, fName) {
   await page.click('div#ext-gen633 > div.x-grid3-row.x-grid3-row-first.x-grid3-row-last');
 
   await page.click('button#ext-gen577')
+  await page.click('button#ext-gen577')
+  await page.click('button#ext-gen577')
+  await page.click('label#ext-comp-1060')
+  await page.type('input#ext-comp-1396', 'Case1');
+  await page.type('input#PrimaryIns', 'AARP');
+  await page.waitFor(1000);
+
+  await page.click('#ext-gen1069 > div.x-combo-list-item.x-combo-selected');
+
+  await page.type('input#RelatedCause', 'None of the Above');
+
+  await page.waitFor(1000);
+  await page.click('#ext-gen1371 > div.x-combo-list-item.x-combo-selected');
+  await page.type('#ext-comp-1507', 'Bryan Wodaski');
+
+  await page.waitFor(1000);
+  await page.click('#ext-gen1414 > div');
+  await page.click('#ext-gen1175');
 
 
   await page.screenshot({
     path: 'example.png'
   });
 
-  await browser.close();
+  //  await browser.close();
 
 };
