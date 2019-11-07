@@ -1,0 +1,60 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/3.3.5/js/tableexport.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<body class="m-5">
+
+  <div ng-app="myApp">
+
+    <div ng-controller="myCtrl1" class="container">
+
+
+      <h3>Start Date</h3>
+
+      <select ng-model="startMonth" ng-options="month for month in months"></select>
+      <select ng-model="startDay" ng-options="day for day in days"></select>
+      <select ng-model="startYear" ng-options="year for year in years"></select>
+
+
+      <h3>End Date</h3>
+
+      <select ng-model="endMonth" ng-options="month for month in months"></select>
+      <select ng-model="endDay" ng-options="day for day in days"></select>
+      <select ng-model="endYear" ng-options="year for year in years"></select>
+
+      <button ng-show="showReportButton" type="button" class="btn btn-primary" ng-click="getReport(startMonth,startDay,startYear,endMonth,endDay,endYear)">Get Report</button>
+      <button ng-show="showFGButton" type="button" class="btn btn-primary" ng-click="sendToFingerCheck()">Send To Fingercheck</button>
+      <button ng-show="showLoading" class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+
+      <table class="table table-striped mt-1">
+        <thead>
+          <tr>
+            <th>Therapist</th>
+            <th>Date of Service</th>
+            <th>Date Finalized</th>
+            <th>Visits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in jsonTable track by $index">
+            <td>{{row.name}}</td>
+            <td>{{row.DateofService}}</td>
+            <td>{{row.DateFinalized}}</td>
+            <td>{{row.Visits}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</body>
+<script src="./myCtrl1.js" type="text/javascript"></script>
+
+</html>
