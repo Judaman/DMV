@@ -1,7 +1,8 @@
-var express = require('express');
+const express = require('express');
 var app = express();
 const sendToZeeMaps = require("./sendToZeeMaps");
 const getReport = require("./getReport");
+const sendToFingerCheck = require("./sendToFingerCheck");
 var reportInJson;
 
 app.use(express.static(__dirname + '/public'));
@@ -15,38 +16,38 @@ app.get('/home', function(req, res) {
 })
 
 app.get('/getReport/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear', async function(req, res) {
-console.log("Got a GET request for the repoert page");
-console.log(req.params);
-var startMonth = req.params.startMonth;
-var startDay = req.params.startDay;
-var startYear = req.params.startYear;
-var endMonth = req.params.endMonth;
-var endDay = req.params.endDay;
-var endYear = req.params.endYear;
+  console.log("Got a GET request for the repoert page");
+  console.log(req.params);
+  var startMonth = req.params.startMonth;
+  var startDay = req.params.startDay;
+  var startYear = req.params.startYear;
+  var endMonth = req.params.endMonth;
+  var endDay = req.params.endDay;
+  var endYear = req.params.endYear;
 
-await getReport.getReport(startMonth, startDay, startYear, endMonth, endDay, endYear).then(function(value){
+  await getReport.getReport(startMonth, startDay, startYear, endMonth, endDay, endYear).then(function(value) {
 
-reportInJson = value;
-res.send(value);
-})
+    reportInJson = value;
+    res.send(value);
+  })
   /*res.sendFile('report.html', {
     root: __dirname
   })*/
 })
 
 app.get('/sendToFingerCheck', async function(req, res) {
-console.log("Got a GET request for sendToFingerCheck");
-console.log(reportInJson);
-res.send(reportInJson);
-/*await sendToFingerCheck.sendToFingerCheck(startMonth, startDay, startYear, endMonth, endDay, endYear).then(function(value){
-
-res.send(value);
-})*/
+  console.log("Got a GET request for sendToFingerCheck");
+  //res.send(reportInJson);
+  await sendToFingerCheck.sendToFingerCheck(reportInJson).then(function(value) {
+    res.send(value);
+  }, function(err) {
+    res.send(err)
+    console.log(err)
+  })
   /*res.sendFile('report.html', {
     root: __dirname
   })*/
 })
-
 
 app.get('/addPatient/:fName/:lName', function(req, res) {
 
@@ -56,8 +57,7 @@ app.get('/addPatient/:fName/:lName', function(req, res) {
   res.send("heelo  " + fName + lName)
 });
 
-
-app.get('/sendToZeeMaps/:lName/:fName/:street/:city/:state/:zipcode/:color',async function(req, res) {
+app.get('/sendToZeeMaps/:lName/:fName/:street/:city/:state/:zipcode/:color', async function(req, res) {
 
 
   var name = req.params.lName + " " + req.params.fName;
@@ -69,7 +69,7 @@ app.get('/sendToZeeMaps/:lName/:fName/:street/:city/:state/:zipcode/:color',asyn
   var color = req.params.color;
 
 
-await sendToZeeMaps.sendToZeeMaps(name,street,city,state,country,zipcode,color);
+  await sendToZeeMaps.sendToZeeMaps(name, street, city, state, country, zipcode, color);
   res.send("Sent " + name)
 });
 
