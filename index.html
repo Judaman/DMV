@@ -13,26 +13,26 @@
     <div ng-controller="myCtrl1" class="container">
 
 
-      <h3>Start Date</h3>
+      <h3 class="h3" style="display:inline;">Start Date</h3>
 
       <select ng-model="startMonth" ng-options="month for month in months"></select>
       <select ng-model="startDay" ng-options="day for day in days"></select>
       <select ng-model="startYear" ng-options="year for year in years"></select>
+<div class="mt-1"></div>
 
-
-      <h3>End Date</h3>
+      <h3  class="h3" style="display:inline;">End Date</h3>
 
       <select ng-model="endMonth" ng-options="month for month in months"></select>
       <select ng-model="endDay" ng-options="day for day in days"></select>
       <select ng-model="endYear" ng-options="year for year in years"></select>
-
+<div class="mt-2"></div>
       <button ng-show="showReportButton" type="button" class="btn btn-primary" ng-click="getReport(startMonth,startDay,startYear,endMonth,endDay,endYear)">Get Report</button>
       <button ng-show="showFGButton" type="button" class="btn btn-primary" ng-click="sendToFingerCheck()">Send To Fingercheck</button>
       <button ng-show="showLoading" class="btn btn-primary" type="button" disabled>
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         Loading...
       </button>
-
+      <button ng-show="showSentButton" class="btn btn-success" type="button">Processed</button>
       <table class="table table-striped mt-1">
         <thead>
           <tr>

@@ -7,8 +7,11 @@ module.exports = {
       const puppeteer = require('puppeteer');
       const tabletojson = require('tabletojson');
       const browser = await puppeteer.launch({
-        headless: false
+        headless: true,
+        timeout: 90000,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
+
       const page = await browser.newPage();
       await page.setViewport({
         width: 1200,
@@ -60,7 +63,7 @@ module.exports = {
           return allHTMLtables;
         });
 
-      var entries = []  
+      var entries = []
       for (var indexOfTables = 0; indexOfTables < allHTMLtables.length; indexOfTables++) {
 
 
@@ -86,6 +89,6 @@ module.exports = {
         path: 'example.png'
       });
 
-      //  await browser.close();
+      await browser.close();
     }
 };

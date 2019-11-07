@@ -1,5 +1,3 @@
-
-
 async function sendToWebPt(lName, fName) {
 
   'use strict';

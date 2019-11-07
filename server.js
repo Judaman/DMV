@@ -37,6 +37,25 @@ app.get('/getReport/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear'
 
 app.get('/sendToFingerCheck', async function(req, res) {
   console.log("Got a GET request for sendToFingerCheck");
+  var reportInJson = [{
+      name: 'YG',
+      DateofService: '06/28/2019',
+      DateFinalized: '11/03/2019 11:02 pm',
+      Visits: '1'
+    },
+    {
+      name: 'YG',
+      DateofService: '07/01/2019',
+      DateFinalized: '11/04/2019 11:14 pm',
+      Visits: '1'
+    },
+    {
+      name: 'YG',
+      DateofService: '07/03/2019',
+      DateFinalized: '11/05/2019 11:25 pm',
+      Visits: '1'
+    }
+  ];
   //res.send(reportInJson);
   await sendToFingerCheck.sendToFingerCheck(reportInJson).then(function(value) {
     res.send(value);
