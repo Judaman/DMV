@@ -1,10 +1,11 @@
 const express = require('express');
-var app = express();
 const sendToZeeMaps = require("./sendToZeeMaps");
 const getReport = require("./getReport");
 const sendToFingerCheck = require("./sendToFingerCheck");
-var reportInJson;
+const sendToWebPt = require("./sendToWebPt");
 
+var reportInJson;
+var app = express();
 app.use(express.static(__dirname + '/public'));
 // This responds with "Hello World" on the homepage
 app.get('/home', function(req, res) {
@@ -68,12 +69,34 @@ app.get('/sendToFingerCheck', async function(req, res) {
   })*/
 })
 
-app.get('/addPatient/:fName/:lName', function(req, res) {
+app.get('/addPatient/:lastName/:firstName/:middleName/:dob/:addressType/:address1/:address2/:city/:state/:zipCode/:phoneType/:phoneNumber/:additionalInfo/:caseTtile/:primaryInsurance/:subscriberId/:secondaryInsurance/:subscriberId2/:referringPhysician/:assignedTherapist', function(req, res) {
 
-  var fName = req.params.fName;
-  var lName = req.params.lName;
-
-  res.send("heelo  " + fName + lName)
+  var lastName = req.params.lastName;
+  var firstName = req.params.firstName;
+  var middleName = req.params.middleName;
+  var dob = req.params.dob;
+  var addressType = req.params.addressType;
+  var address1 = req.params.address1;
+  var address2 = req.params.address2;
+  var city = req.params.city;
+  var state = req.params.state;
+  var zipCode = req.params.zipCode;
+  var zeeMapsColor = req.params.zeeMapsColor;
+  var discipline = req.params.discipline;
+  var phoneType = req.params.phoneType;
+  var phoneNumber = req.params.phoneNumber;
+  var additionalInfo = req.params.additionalInfo;
+  var caseTtile = req.params.caseTtile;
+  var primaryInsurance = req.params.primaryInsurance;
+  var subscriberId = req.params.subscriberId;
+  var secondaryInsurance = req.params.secondaryInsurance;
+  var subscriberId2 = req.params.subscriberId2;
+  var relatedCause = req.params.relatedCause;
+  var referringPhysician = req.params.referringPhysician;
+  var assignedTherapist = req.params.assignedTherapist;
+  sendToWebPt.sendToWebPt(lastName, firstName, middleName, dob, addressType, address1, address2, city, state, zipCode, phoneType, phoneNumber, additionalInfo, caseTtile, primaryInsurance, subscriberId, secondaryInsurance, subscriberId2, referringPhysician, assignedTherapist)
+  console.log(req.params);
+  res.send("heelo  " + req.params)
 });
 
 app.get('/sendToZeeMaps/:lName/:fName/:street/:city/:state/:zipcode/:color', async function(req, res) {
