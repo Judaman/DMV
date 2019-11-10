@@ -56,7 +56,6 @@ module.exports = {
       //  await page.click('div.x-combo-list-item.x-combo-selected');
 
       await page.type('input#ext-comp-1133', address1);
-
       await page.type('input#ext-comp-1134', city);
       await page.type('input#ext-comp-1135', zipCode);
       await page.type('input#ext-comp-1138', address2);
@@ -101,15 +100,25 @@ module.exports = {
       await page.type('input#ext-comp-1242', lastName);
       await page.type('input#ext-comp-1245', dob);
       await page.type('input#ext-comp-1260', addressType);
+      await page.waitFor(2000);
+      await page.waitForSelector('div#ext-gen860.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
+      await page.click('div#ext-gen860.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
+
       await page.type('input#ext-comp-1261', address1);
       await page.type('input#ext-comp-1262', city);
       await page.type('input#ext-comp-1263', zipCode);
       await page.type('input#ext-comp-1243', "Male");
+      await page.waitFor(2000);
+      await page.waitForSelector('div#ext-gen862.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
+      await page.click('div#ext-gen862.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
       await page.type('input#ext-comp-1250', "Other");
       await page.type('input#ext-comp-1266', state);
+      await page.waitFor(2000);
+      await page.waitForSelector('div#ext-gen866.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
+      await page.click('div#ext-gen866.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
       await page.type('input#ext-comp-1282', phoneNumber);
 
-
+      return
 
       await page.click('button#ext-gen577')
       await page.click('label#ext-comp-1060')
