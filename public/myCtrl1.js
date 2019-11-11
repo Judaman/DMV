@@ -13,17 +13,20 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
   $scope.endYear = "2019";
   $scope.jsonTable;
 
+  $scope.password = "";
+
   $scope.showLoading = false;
   $scope.showReportButton = true;
   $scope.showFGButton = false;
   $scope.showSentButton = false;
+  $scope.showErrorButton = false;
   //  $scope.report =
   $scope.getReport = function(startMonth, startDay, startYear, endMonth, endDay, endYear) {
     $scope.showLoading = true;
     $scope.showReportButton = false;
     console.log(startMonth, startDay, startYear, endMonth, endDay, endYear);
 
-    $http.get("/getReport/" + startMonth + "/" + startDay + "/" + startYear + "/" + endMonth + "/" + endDay + "/" + endYear)
+    $http.get("/getReport/" + $scope.password + "/" + startMonth + "/" + startDay + "/" + startYear + "/" + endMonth + "/" + endDay + "/" + endYear)
       .then(function mySuccess(response) {
 
         console.log(response.data.length);
@@ -32,9 +35,14 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
         $scope.showLoading = false;
         $scope.showFGButton = true;
 
-
       }, function myError(response) {
         $scope.showLoading = false;
+        $scope.showErrorButton = true;
+
+        if (response.data == "Incorrect Password") {
+          alert("Incorrect Password")
+        }
+
         console.log(response);
       });
 
@@ -49,6 +57,7 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
         $scope.showLoading = false;
         $scope.showSentButton = true;
       }, function myError(response) {
+        $scope.showErrorButton = true;
         $scope.showLoading = false;
         console.log(response);
       });

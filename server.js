@@ -16,7 +16,7 @@ app.get('/home', function(req, res) {
   })
 })
 
-app.get('/getReport/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear', async function(req, res) {
+app.get('/getReport/:password/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear', async function(req, res) {
   console.log("Got a GET request for the repoert page");
   console.log(req.params);
   var startMonth = req.params.startMonth;
@@ -25,38 +25,24 @@ app.get('/getReport/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear'
   var endMonth = req.params.endMonth;
   var endDay = req.params.endDay;
   var endYear = req.params.endYear;
+  var password = req.params.password;
+if (password !== "yudidaniel12") {
+  res.status(500).send("Incorrect Password");
+  return
+}
 
   await getReport.getReport(startMonth, startDay, startYear, endMonth, endDay, endYear).then(function(value) {
 
     reportInJson = value;
     res.send(value);
+  }, function(err) {
+    res.status(500).send(err);
+    console.log(err)
   })
-  /*res.sendFile('report.html', {
-    root: __dirname
-  })*/
 })
 
 app.get('/sendToFingerCheck', async function(req, res) {
   console.log("Got a GET request for sendToFingerCheck");
-  var reportInJson = [{
-      name: 'YG',
-      DateofService: '06/28/2019',
-      DateFinalized: '11/03/2019 11:02 pm',
-      Visits: '1'
-    },
-    {
-      name: 'YG',
-      DateofService: '07/01/2019',
-      DateFinalized: '11/04/2019 11:14 pm',
-      Visits: '1'
-    },
-    {
-      name: 'YG',
-      DateofService: '07/03/2019',
-      DateFinalized: '11/05/2019 11:25 pm',
-      Visits: '1'
-    }
-  ];
   //res.send(reportInJson);
   await sendToFingerCheck.sendToFingerCheck(reportInJson).then(function(value) {
     res.send(value);

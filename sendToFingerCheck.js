@@ -17,7 +17,7 @@ module.exports = {
 
           var body = {
             "EmployeeNumber": employeeNumber,
-            "Date": visit.DateFinalized,
+            "Date": visit.DateofService,
             "EarningCode": "65 dollars",
             "PaidHourType": 0,
             "Hours": 1.0,

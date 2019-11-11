@@ -83,12 +83,13 @@ module.exports = {
         }
       }
       console.log(entries.length);
+        await browser.close();
       return entries;
 
-      await page.screenshot({
+  /*    await page.screenshot({
         path: 'example.png'
-      });
+      });*/
 
-      await browser.close();
+
     }
 };
