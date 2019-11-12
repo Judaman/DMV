@@ -17,7 +17,7 @@ app.get('/home', function(req, res) {
 })
 
 app.get('/getReport/:password/:startMonth/:startDay/:startYear/:endMonth/:endDay/:endYear', async function(req, res) {
-  console.log("Got a GET request for the repoert page");
+  console.log("Got a GET request for the report page");
   console.log(req.params);
   var startMonth = req.params.startMonth;
   var startDay = req.params.startDay;

@@ -51,7 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="row in jsonTable track by $index">
+          <tr  ng-style="{'background-color': row.backgroundColor}" ng-repeat="row in jsonTable track by $index">
             <td>{{row.name}}</td>
             <td>{{row.DateofService}}</td>
             <td>{{row.DateFinalized}}</td>
