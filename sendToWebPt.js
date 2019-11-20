@@ -38,7 +38,7 @@ module.exports = {
       await page.type('input#ext-comp-1009', firstName);
       await page.type('input#ext-comp-1011', middleName);
       await page.type('input#ext-comp-1013', lastName);
-      await page.type('input#ext-comp-1013', lastName);
+
       await page.type('input#ext-comp-1020', 'Male');
       await page.type('input#ext-comp-1023', dob.substring(0, 2));
       await page.type('input#ext-comp-1025', dob.substring(2, 4));
@@ -101,9 +101,11 @@ module.exports = {
       await page.waitFor(2000);
       await page.waitForSelector('div#ext-gen862.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
       await page.click('div#ext-gen862.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
-      await page.type('input#ext-comp-1250', 'Other');
-      await page.waitFor(2000);
-      await page.waitForSelector('div#ext-gen864.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
+
+      await page.click('img#ext-gen770');
+      await page.type('input#ext-comp-1250', 'Othe');
+
+      //    await page.waitForSelector('div#ext-gen864.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
       await page.click('div#ext-gen864.x-combo-list-inner > div.x-combo-list-item.x-combo-selected');
 
 
@@ -115,7 +117,7 @@ module.exports = {
       await page.type('input#ext-comp-1282', phoneNumber);
 
 
-//add case
+      //add case
       await page.click('button#ext-gen577')
       await page.click('label#ext-comp-1060')
       await page.type('input#ext-comp-1400', caseTtile);
@@ -125,20 +127,22 @@ module.exports = {
       await page.waitForSelector('#ext-gen1077 > div.x-combo-list-item.x-combo-selected');
       await page.click('#ext-gen1077 > div.x-combo-list-item.x-combo-selected');
 
-      await page.type('input#RelatedCause', 'None of the Above');
-      await page.waitForSelector('#ext-gen1080 > div.x-combo-list-item.x-combo-selected');
-      await page.click('#ext-gen1080 > div.x-combo-list-item.x-combo-selected');
+      await page.type('input#RelatedCause', 'None of the Abov');
+      await page.waitFor(1000);
+      //  await page.click('img#ext-gen938');
+      //    await page.waitForSelector('#ext-gen1079 > div.x-combo-list-item.x-combo-selected');
+      await page.click('#ext-gen1079 > div.x-combo-list-item.x-combo-selected');
 
       await page.waitFor(1000);
       //  await page.waitForSelector("#ext-gen-1082 > div.x-combo-list-item.x-combo-selected")
       //  await page.click('#ext-gen-1082 > div.x-combo-list-item.x-combo-selected');
       await page.type('#ext-comp-1412', referringPhysician); //must be last name only in order to work
-      await page.waitForSelector("#ext-gen1082 > div.x-combo-list-item.x-combo-selected")
-      await page.click('#ext-gen1082 > div.x-combo-list-item.x-combo-selected');
+      await page.waitForSelector("#ext-gen1081 > div.x-combo-list-item.x-combo-selected")
+      await page.click('#ext-gen1081 > div.x-combo-list-item.x-combo-selected');
 
       await page.type('#ext-comp-1419', assignedTherapist);
-      await page.waitForSelector("#ext-gen1123 > div.x-combo-list-item.x-combo-selected")
-      await page.click("#ext-gen1123 > div.x-combo-list-item.x-combo-selected")
+      await page.waitForSelector("#ext-gen1122 > div.x-combo-list-item.x-combo-selected")
+      await page.click("#ext-gen1122 > div.x-combo-list-item.x-combo-selected")
 
       await page.click('#ext-gen884');
       return

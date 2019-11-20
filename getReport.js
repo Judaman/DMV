@@ -79,27 +79,29 @@ module.exports = {
             obj.DateFinalized = converted[i]["Date Finalized"];
             obj.Visits = converted[i].Visits;
 
-            var startDate = new Date(startYear, startMonth, startDay);
-            var serviceDate = new Date(Number(obj.DateofService.substr(6, 4)), Number(obj.DateofService.substr(0, 2)), Number(obj.DateofService.substr(3, 2)));
+            var startDate = new Date(startYear, startMonth-1, startDay);
+            var serviceDate = new Date(Number(obj.DateofService.substr(6, 4)), Number(obj.DateofService.substr(0, 2))-1, Number(obj.DateofService.substr(3, 2)));
+
+          //  console.log(obj);
             if (serviceDate.getTime() < startDate.getTime()) {
 
               obj.backgroundColor = "red";
-                console.log(obj);
+              //    console.log(obj);
             } else {
 
               obj.backgroundColor = "inherit";
             }
 
-          entries.push(obj)
+            entries.push(obj)
+          }
         }
       }
-    }
-  //console.log(entries.length);
-  await browser.close();
-  return entries;
+      //console.log(entries.length);
+      await browser.close();
+      return entries;
 
-  /*    await page.screenshot({
-        path: 'example.png'
-      });*/
-}
+      /*    await page.screenshot({
+            path: 'example.png'
+          });*/
+    }
 };
