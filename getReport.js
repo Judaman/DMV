@@ -62,6 +62,15 @@ module.exports = {
           }
           return allHTMLtables;
         });
+      var patientCount = await page.evaluate(function() {
+        return document.querySelector("#billing > table.form-text > tbody > tr:nth-child(2) > td > table > tbody > tr > td.subHeaderTopLeft > span:nth-child(1)").innerHTML
+      });
+      var visitsCount = await page.evaluate(function() {
+        return document.querySelector("#billing > table.form-text > tbody > tr:nth-child(2) > td > table > tbody > tr > td.subHeaderTopLeft > span:nth-child(2)").innerHTML
+      });
+
+      console.log(patientCount);
+      console.log(visitsCount);
 
       var entries = []
       for (var indexOfTables = 0; indexOfTables < allHTMLtables.length; indexOfTables++) {
@@ -79,10 +88,10 @@ module.exports = {
             obj.DateFinalized = converted[i]["Date Finalized"];
             obj.Visits = converted[i].Visits;
 
-            var startDate = new Date(startYear, startMonth-1, startDay);
-            var serviceDate = new Date(Number(obj.DateofService.substr(6, 4)), Number(obj.DateofService.substr(0, 2))-1, Number(obj.DateofService.substr(3, 2)));
+            var startDate = new Date(startYear, startMonth - 1, startDay);
+            var serviceDate = new Date(Number(obj.DateofService.substr(6, 4)), Number(obj.DateofService.substr(0, 2)) - 1, Number(obj.DateofService.substr(3, 2)));
 
-          //  console.log(obj);
+            //  console.log(obj);
             if (serviceDate.getTime() < startDate.getTime()) {
 
               obj.backgroundColor = "red";
@@ -98,7 +107,11 @@ module.exports = {
       }
       //console.log(entries.length);
       await browser.close();
-      return entries;
+      return {
+        entries: entries,
+        patientCount: patientCount,
+        visitsCount: visitsCount
+      };
 
       /*    await page.screenshot({
             path: 'example.png'

@@ -12,6 +12,8 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
   $scope.endDay = "06";
   $scope.endYear = "2019";
   $scope.jsonTable;
+  $scope.patientCount;
+  $scope.visitsCount;
 
   $scope.password = "";
 
@@ -29,9 +31,11 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
     $http.get("/getReport/" + $scope.password + "/" + startMonth + "/" + startDay + "/" + startYear + "/" + endMonth + "/" + endDay + "/" + endYear)
       .then(function mySuccess(response) {
 
-        console.log(response.data.length);
 
-        $scope.jsonTable = response.data;
+        $scope.patientCount = response.data.patientCount.replace("&nbsp;"," ");
+        $scope.visitsCount = response.data.visitsCount.replace("&nbsp;"," ");;
+
+        $scope.jsonTable = response.data.entries;
         $scope.showLoading = false;
         $scope.showFGButton = true;
 
@@ -53,7 +57,7 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
     $scope.showFGButton = false;
     $http.get("/sendToFingerCheck/")
       .then(function mySuccess(response) {
-      //  console.log(response);
+        //  console.log(response);
         $scope.showLoading = false;
         $scope.showSentButton = true;
       }, function myError(response) {
