@@ -32,8 +32,8 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
       .then(function mySuccess(response) {
 
 
-        $scope.patientCount = response.data.patientCount.replace("&nbsp;"," ");
-        $scope.visitsCount = response.data.visitsCount.replace("&nbsp;"," ");;
+        $scope.patientCount = response.data.patientCount.replace("&nbsp;", " ");
+        $scope.visitsCount = response.data.visitsCount.replace("&nbsp;", " ");;
 
         $scope.jsonTable = response.data.entries;
         $scope.showLoading = false;
@@ -66,4 +66,30 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
         console.log(response);
       });
   };
+
+  $scope.sortByDos = function() {
+    $scope.jsonTable.sort(function(a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.DateofService) - new Date(a.DateofService);
+    });
+  };
+  $scope.sortByDf = function() {
+    $scope.jsonTable.sort(function(a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.DateFinalized) - new Date(a.DateFinalized);
+    });
+  };
+
+
+  $scope.sortByName = function() {
+  $scope.jsonTable.sort(function(a, b) {
+      var textA = a.name.toUpperCase();
+      var textB = b.name.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+  };
+
+
 });
