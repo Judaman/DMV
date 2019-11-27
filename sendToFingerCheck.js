@@ -1,6 +1,9 @@
 module.exports = {
   sendToFingerCheck: async function sendToFingerCheck(reportInJson) {
-    console.log(reportInJson);
+
+
+
+    const fs = require('fs');
 
     let headers = {
       "Content-Type": "application/json",
@@ -11,11 +14,13 @@ module.exports = {
     let fetch = require('node-fetch');
     const employeeNumbers = await allEmployeeNumbers();
     var url = "https://developer.fingercheck.com/api/v1/Punch/AddPaidHour";
-    console.log(reportInJson);
-    for (var indexOfVisits = 0; indexOfVisits < reportInJson.length; indexOfVisits++) {
-      var visit = reportInJson[indexOfVisits];
+
+    var txtFile = [];
+
+    for (var indexOfVisits = 0; indexOfVisits < reportInJson.entries.length; indexOfVisits++) {
+      var visit = reportInJson.entries[indexOfVisits];
       if (visit.name != "") {
-        //    console.log(visit.name);
+
         var employeeNumber = getEmployeeNumber(visit.name, employeeNumbers);
 
         var body = {
@@ -27,8 +32,6 @@ module.exports = {
           "Amount": 65.0,
         };
 
-
-        console.log(body);
         try {
           await fetch(url, {
               method: 'POST',
@@ -49,8 +52,16 @@ module.exports = {
           console.log(e);
         }
       }
-
+      txtFile.push(JSON.stringify(body));
     };
+
+    fs.writeFile('test.txt', txtFile, (err) => {
+      // throws an error, you could also catch it here
+      if (err) throw err;
+
+      // success case, the file was saved
+      console.log('Lyric saved!');
+    });
 
     function getEmployeeNumber(initals, employeeNumbers) {
       var employeeNumber = employeeNumbers[initals];
@@ -79,7 +90,7 @@ module.exports = {
           var allEmployees = json;
           for (var i = 0; i < allEmployees.length; i++) {
             var firstInitial = String(allEmployees[i].FirstName)[0];
-            console.log(allEmployees);
+
             if (allEmployees[i].MiddleInitial != " ") {
               var middleInitial = String(allEmployees[i].MiddleInitial)[0];
             } else {
