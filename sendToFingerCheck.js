@@ -3,7 +3,7 @@ module.exports = {
 
 
 
-    const fs = require('fs');
+
 
     let headers = {
       "Content-Type": "application/json",
@@ -55,13 +55,6 @@ module.exports = {
       txtFile.push(JSON.stringify(body));
     };
 
-    fs.writeFile('test.txt', txtFile, (err) => {
-      // throws an error, you could also catch it here
-      if (err) throw err;
-
-      // success case, the file was saved
-      console.log('Lyric saved!');
-    });
 
     function getEmployeeNumber(initals, employeeNumbers) {
       var employeeNumber = employeeNumbers[initals];

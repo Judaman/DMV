@@ -57,7 +57,7 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
     $scope.showFGButton = false;
     $http.get("/sendToFingerCheck/")
       .then(function mySuccess(response) {
-        //  console.log(response);
+          console.log(response);
         $scope.showLoading = false;
         $scope.showSentButton = true;
       }, function myError(response) {
