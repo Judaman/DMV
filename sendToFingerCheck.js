@@ -22,7 +22,7 @@ module.exports = {
       if (visit.name != "") {
 
         var employeeNumber = getEmployeeNumber(visit.name, employeeNumbers);
-
+	
         var body = {
           "EmployeeNumber": employeeNumber,
           "Date": visit.DateofService,
@@ -31,7 +31,7 @@ module.exports = {
           "Hours": 1.0,
           "Amount": 65.0,
         };
-
+		console.log(body)
         try {
           await fetch(url, {
               method: 'POST',

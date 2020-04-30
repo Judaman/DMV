@@ -26,7 +26,7 @@ app.get('/getReport/:password/:startMonth/:startDay/:startYear/:endMonth/:endDay
   var endDay = req.params.endDay;
   var endYear = req.params.endYear;
   var password = req.params.password;
-if (password !== "yudidaniel12") {
+if (password !== "Benandesty1!") {
   res.status(500).send("Incorrect Password");
   return
 }

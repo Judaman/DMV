@@ -7,10 +7,10 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
   $scope.years = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
   $scope.startMonth = "06";
   $scope.startDay = "06";
-  $scope.startYear = "2019";
+  $scope.startYear = "2020";
   $scope.endMonth = "06";
   $scope.endDay = "06";
-  $scope.endYear = "2019";
+  $scope.endYear = "2020";
   $scope.jsonTable;
   $scope.patientCount;
   $scope.visitsCount;

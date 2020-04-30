@@ -22,7 +22,7 @@ module.exports = {
 
       await page.goto('https://auth.webpt.com/');
       await page.type('input#login-username', 'daniel.roth');
-      await page.type('input#login-password', 'Yehudag123!');
+      await page.type('input#login-password', 'benandesty1!');
       await page.click('input#login-button');
       await page.waitForNavigation();
       await page.click('button.eviction-option.ok')
