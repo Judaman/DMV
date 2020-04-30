@@ -1,4 +1,4 @@
-module.exports = {// test
+module.exports = {
   getReport:
 
     async function getReport(startMonth, startDay, startYear, endMonth, endDay, endYear) {
