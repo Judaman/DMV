@@ -7,7 +7,7 @@ module.exports = {
       const puppeteer = require('puppeteer');
       const tabletojson = require('tabletojson');
       const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         timeout: 90000,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
