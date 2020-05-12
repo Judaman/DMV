@@ -7,10 +7,10 @@ const sendToWebPt = require("./sendToWebPt");
 var reportInJson;
 var app = express();
 app.use(express.static(__dirname + '/public'));
-// This responds with "Hello World" on the homepage
+
 app.get('/home', function(req, res) {
   console.log("Got a GET request for the homepage");
-  //   res.send("home page" + req.params.id)
+
   res.sendFile('index.html', {
     root: __dirname
   })
@@ -26,12 +26,12 @@ app.get('/getReport/:password/:startMonth/:startDay/:startYear/:endMonth/:endDay
   var endDay = req.params.endDay;
   var endYear = req.params.endYear;
   var password = req.params.password;
-if (password !== "Benandesty1!") {
-  res.status(500).send("Incorrect Password");
-  return
-}
+// if (password !== "Benandesty1!") {
+//   res.status(500).send("Incorrect Password");
+//   return
+// }
 
-  await getReport.getReport(startMonth, startDay, startYear, endMonth, endDay, endYear).then(function(value) {
+  await getReport.getReport(startMonth, startDay, startYear, endMonth, endDay, endYear,password).then(function(value) {
 
     reportInJson = value;
     res.send(value);

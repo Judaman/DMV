@@ -2,15 +2,23 @@ var app = angular.module('myApp', []);
 
 app.controller('myCtrl1', function($scope, $http, $sce) {
 
+  var d = new Date();
+ 
+  var sd = d.getDate() == '01' ? '15' : '01';
+  var month = d.getMonth() + 1;
+  month = month < 10 ? '0' + month.toString() : month.toString();
+
+
+
   $scope.months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", ];
   $scope.days = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"];
   $scope.years = ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
-  $scope.startMonth = "06";
-  $scope.startDay = "06";
-  $scope.startYear = "2020";
-  $scope.endMonth = "06";
-  $scope.endDay = "06";
-  $scope.endYear = "2020";
+  $scope.startMonth = month;
+  $scope.startDay = sd;
+  $scope.startYear = d.getFullYear().toString();
+  $scope.endMonth =  month;
+  $scope.endDay =  d.getDate().toString();
+  $scope.endYear =  d.getFullYear().toString();
   $scope.jsonTable;
   $scope.patientCount;
   $scope.visitsCount;
@@ -53,6 +61,12 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
   };
 
   $scope.sendToFingerCheck = function() {
+
+    var r = confirm("Are you sure you want to send to Finger Check?");
+    if (r !== true) {
+     return;
+    }
+
     $scope.showLoading = true;
     $scope.showFGButton = false;
     $http.get("/sendToFingerCheck/")

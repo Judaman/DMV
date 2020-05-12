@@ -1,13 +1,13 @@
 module.exports = {
   getReport:
 
-    async function getReport(startMonth, startDay, startYear, endMonth, endDay, endYear) {
+    async function getReport(startMonth, startDay, startYear, endMonth, endDay, endYear,password) {
 
       'use strict';
       const puppeteer = require('puppeteer');
       const tabletojson = require('tabletojson');
       const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         timeout: 90000,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
@@ -22,9 +22,9 @@ module.exports = {
 
       await page.goto('https://auth.webpt.com/');
       await page.type('input#login-username', 'daniel.roth');
-      await page.type('input#login-password', 'benandesty1!');
+      await page.type('input#login-password', password);
       await page.click('input#login-button');
-      await page.waitForNavigation();
+      await page.waitForNavigation({timeout : 20000});
       await page.click('button.eviction-option.ok')
       await page.goto('https://app.webpt.com/billingReport.php');
       await page.select('select#StartDateMonth.inputBox', startMonth);
