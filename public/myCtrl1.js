@@ -4,11 +4,12 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
 
   var d = new Date();
  
-  var sd = d.getDate() == '01' ? '15' : '01';
   var month = d.getMonth() + 1;
   month = month < 10 ? '0' + month.toString() : month.toString();
-
-
+  
+  var isLastDayOfMonth = new Date(d.getFullYear(), d.getMonth() + 1 , 0).getDate() == d.getDate() ? true : false; 
+  var sd = isLastDayOfMonth ? '16' : '01';
+  
 
   $scope.months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", ];
   $scope.days = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"];
@@ -17,7 +18,7 @@ app.controller('myCtrl1', function($scope, $http, $sce) {
   $scope.startDay = sd;
   $scope.startYear = d.getFullYear().toString();
   $scope.endMonth =  month;
-  $scope.endDay =  d.getDate().toString();
+  $scope.endDay =  d.getDate() < 10 ? '0' + d.getDate.toString() : d.getDate().toString();
   $scope.endYear =  d.getFullYear().toString();
   $scope.jsonTable;
   $scope.patientCount;
